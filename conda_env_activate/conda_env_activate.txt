@@ -1,0 +1,8 @@
+@echo off
+REM # comment line # To run this file at startup user windows key +R >> Run Box "shell:startup" put this file or copy one this file and restart the Computer
+CALL C:\ProgramData\Anaconda3\Scripts\activate.bat C:\Users\username\.conda\envs\pytorch
+
+
+CD /D D:\yolov8_object_detection
+
+python server.py
