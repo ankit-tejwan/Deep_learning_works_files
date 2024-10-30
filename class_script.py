@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 from collections import Counter
 
 # Set paths
-label_dir =  r"train/labels"  # Replace with the path to your label files
+# label_dir =  r"train/labels"  # Replace with the path to your label files
+label_dir =  r"train"
 
 # Class names
 names = ['class 0', 'class 1', 'class 2']

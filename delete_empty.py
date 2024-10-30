@@ -1,7 +1,7 @@
 import os
 
 # Set the path to the labels directory
-label_dir = r"train/labels"  # Replace with the path to your labels folder
+label_dir = r"yolo_data_labels"  # Replace with the path to your labels folder
 
 # Iterate through the files in the directory
 for filename in os.listdir(label_dir):
