@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .image-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            max-width: 50%;
+            overflow: hidden;
+            margin-left: -45%;
+        }
+
+        .image-container img {
+            width: 100%; /* Ensure the image fits within the container */
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .details-container {
+            margin-top: -48%;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: 1%;
+            margin-bottom: 500px;
+        }
+
+        .details-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .details-container li {
+            margin: 10px 0;
+        }
+
+        .status-ok {
+            color: green;
+        }
+
+        .status-ng {
+            color: red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Database Image Viewer</h1>
+
+    <!-- Image Container -->
+    <div class="image-container">
+        <h2>Image from Database</h2>
+        {% if image_data %}
+            <!-- Display the image from the base64 string -->
+            <img src="data:image/jpeg;base64,{{ image_data }}" alt="Image from Database" />
+        {% else %}
+            <!-- Display a placeholder if no image is found -->
+            <p>No image available</p>
+        {% endif %}
+    </div>
+
+    <!-- Image Details -->
+    <div class="details-container">
+        <h3>Image Details:</h3>
+        <ul>
+            <li><strong>Image ID:</strong> {{ image_id }}</li>
+
+            <!-- Status with conditional color -->
+            <li><strong>Status:</strong> 
+                <span class="{% if status == 'NG' %}status-ng{% elif status == 'OK' %}status-ok{% else %}status-default{% endif %}">
+                    {{ status }}
+                </span>
+            </li>
+
+            <li><strong>Packet Count:</strong> {{ count }}</li>
+            <li><strong>Lab List:</strong> 
+                <ul>
+                    {% for lab in lab_list %}
+                        <li>{{ lab }}</li>
+                    {% else %}
+                        <li>No labs available</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message">
+        {% if not image_data %}
+            <p>Error: No image found in the database.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
